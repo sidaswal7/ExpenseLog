@@ -1,7 +1,8 @@
 import React from "react";
+import Profile from "../components/Profile/Profile";
 
 const ProfilePage = ()=>{
-    return <h1>Welcome to the expense tracker!</h1>
+    return <Profile/>
 }
 
 export default ProfilePage;
