@@ -1,8 +1,18 @@
+import { Route, Switch } from "react-router-dom";
+import AuthPage from "./pages/AuthPage";
+import Header from "./components/Header/Header";
 
 function App() {
   return (
     <>
-      <h1 className='text-3xl text-center text-purple-700 font-semibold'>This is the expense tracker</h1>
+      <Header/>
+      <Switch>
+        <Route path="/auth" exact>
+          <AuthPage/>
+        </Route>
+      </Switch>
+
+      
     </>
   );
 }
