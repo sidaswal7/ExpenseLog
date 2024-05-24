@@ -1,14 +1,19 @@
-import React, { useRef, useState } from "react";
+import React, { useContext, useRef, useState } from "react";
+import AuthContext from "../../store/auth-context";
+import { useHistory } from "react-router";
+
 
 const AuthForm = () => {
   const [hasAccount, setHasAccount] = useState(true);
+  const authCtx = useContext(AuthContext);
+  const history = useHistory();
 
   const switchAuthHandler = ()=>{
     setHasAccount((prevState)=> !prevState)
   }
-  const emailRef = useRef("");
-  const passwordRef = useRef("");
-  const confirmPasswordRef = useRef("");
+  const emailRef = useRef();
+  const passwordRef = useRef();
+  const confirmPasswordRef = useRef();
 
   const formHandler = (event) => {
     event.preventDefault();
@@ -16,9 +21,32 @@ const AuthForm = () => {
     const enteredEmail = emailRef.current.value;
     const enteredPassword = passwordRef.current.value;
     
-
     if(hasAccount){
-        console.log('Login form')
+        (async function logIn(){
+            try{
+                const response = await fetch(`https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDiNPSbnww3wqjV__h5IH1CxHVhOpu7zD4`,{
+                    method:'POST',
+                    body: JSON.stringify({
+                        email: enteredEmail,
+                        password: enteredPassword,
+                        returnedSecureToken: true                       
+                    }),
+                    headers:{
+                        'Content-Type':'application/json'
+                    }
+                })
+                const data = await response.json();
+                if(response.ok){
+                    authCtx.login(data.idToken)
+                    history.replace('/profile')
+                } else{
+                    throw new Error(data.error.message)
+                }
+
+            } catch(error){
+                alert(error.message);
+            }
+        })();
     } else{
         const confirmPassword = confirmPasswordRef.current.value;
         if(enteredPassword !== confirmPassword){
@@ -27,8 +55,7 @@ const AuthForm = () => {
         }
         (async function signUp(){
             try{
-                const response = await fetch(`https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=
-                AIzaSyDiNPSbnww3wqjV__h5IH1CxHVhOpu7zD4`,{
+                const response = await fetch(`https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDiNPSbnww3wqjV__h5IH1CxHVhOpu7zD4`,{
                     method:'POST',
                     body: JSON.stringify({
                         email: enteredEmail,
@@ -75,7 +102,7 @@ const AuthForm = () => {
             type="password"
             placeholder="Enter Password"
             required
-            ref={confirmPasswordRef}
+            ref={passwordRef}
             className="border border-slate-500 p-1 mb-3 placeholder:text-sm text-slate-500"
           />
         </div>
@@ -85,7 +112,7 @@ const AuthForm = () => {
               type="password"
               placeholder="Confirm Password"
               required
-              ref={passwordRef}
+              ref={confirmPasswordRef}
               className="border border-slate-500 p-1 mb-3 placeholder:text-sm text-slate-500"
             />
           </div>
