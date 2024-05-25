@@ -37,7 +37,7 @@ const AuthForm = () => {
                 })
                 const data = await response.json();
                 if(response.ok){
-                    authCtx.login(data.idToken)
+                    authCtx.login(data.idToken, data.displayName)
                     history.replace('/profile')
                 } else{
                     throw new Error(data.error.message)
