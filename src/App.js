@@ -5,6 +5,7 @@ import ProfilePage from "./pages/ProfilePage";
 import { useContext } from "react";
 import AuthContext from "./store/auth-context";
 import ForgotPasswordPage from "./pages/ForgotPasswordPage";
+import ExpensePage from "./pages/ExpensePage";
 
 function App() {
   const authCtx = useContext(AuthContext);
@@ -18,8 +19,11 @@ function App() {
         <Route path="/profile" exact>
           {authCtx.isLoggedIn ? <ProfilePage/>: <Redirect to="/auth"/>}
         </Route>
-        <Route path="/forgot-password">
+        <Route path="/forgot-password" exact>
           {authCtx.isLoggedIn ? <Redirect to="/profile"/>:<ForgotPasswordPage/>}
+        </Route>
+        <Route path="/expenses" exact>
+          {authCtx.isLoggedIn ? <ExpensePage/>:<Redirect to="/auth"/>}
         </Route>
       </Switch>
 
