@@ -4,6 +4,7 @@ import Header from "./components/Header/Header";
 import ProfilePage from "./pages/ProfilePage";
 import { useContext } from "react";
 import AuthContext from "./store/auth-context";
+import ForgotPasswordPage from "./pages/ForgotPasswordPage";
 
 function App() {
   const authCtx = useContext(AuthContext);
@@ -12,10 +13,13 @@ function App() {
       <Header/>
       <Switch>
         <Route path="/auth" exact>
-          {authCtx.hasAccount ?<Redirect to="/profile"/>:<AuthPage/>}
+          {authCtx.isLoggedIn ?<Redirect to="/profile"/>:<AuthPage/>}
         </Route>
         <Route path="/profile" exact>
-          {authCtx.hasAccount ? <ProfilePage/>: <Redirect to="/auth"/>}
+          {authCtx.isLoggedIn ? <ProfilePage/>: <Redirect to="/auth"/>}
+        </Route>
+        <Route path="/forgot-password">
+          {authCtx.isLoggedIn ? <Redirect to="/profile"/>:<ForgotPasswordPage/>}
         </Route>
       </Switch>
 

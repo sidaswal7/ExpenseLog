@@ -1,6 +1,7 @@
 import React, { useContext, useRef, useState } from "react";
 import AuthContext from "../../store/auth-context";
 import { useHistory } from "react-router";
+import { Link } from "react-router-dom";
 
 
 const AuthForm = () => {
@@ -106,6 +107,11 @@ const AuthForm = () => {
             className="border border-slate-500 p-1 mb-3 placeholder:text-sm text-slate-500"
           />
         </div>
+        { hasAccount && (
+            <div className="flex justify-center items-center">
+                <Link to="/forgot-password" className="text-red-500 underline text-sm">Forgot Password?</Link>
+            </div>
+        )}
         {!hasAccount && (
           <div>
             <input
