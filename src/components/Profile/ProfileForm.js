@@ -1,11 +1,10 @@
-import React, { useContext, useRef } from "react";
+import React, { useCallback, useContext, useEffect, useRef } from "react";
 import AuthContext from "../../store/auth-context";
 
 const ProfileForm = (props)=>{
     const authCtx = useContext(AuthContext);
     const nameRef = useRef();
     const photoUrlref = useRef();
-
     const submitHandler = (event)=>{
         event.preventDefault()
         const enteredName = nameRef.current.value;
@@ -23,7 +22,7 @@ const ProfileForm = (props)=>{
                     'Content-Type': 'application/json'
                 }
             })
-            const data = response.json();
+            const data = await response.json();
             if(response.ok){
                 props.onToggle();
                 console.log(data);
@@ -36,6 +35,31 @@ const ProfileForm = (props)=>{
             }
         })()
     }
+    const fetchData = useCallback(async ()=>{
+        try{
+            const response = await fetch('https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=AIzaSyDiNPSbnww3wqjV__h5IH1CxHVhOpu7zD4',{
+                    method:'POST',
+                    body: JSON.stringify({idToken: authCtx.token}),
+                    headers:{
+                        'Content-Type':'application/json'
+                    }
+            })
+            const data = await response.json();
+            if(response.ok){
+                nameRef.current.value = data.users[0].displayName
+                photoUrlref.current.value = data.users[0].photoUrl
+            }
+            else{
+                throw new Error(data.error.message)
+            }
+        } catch(error){
+            console.log(error.message)
+        }
+    },[authCtx.token])
+
+    useEffect(()=>{
+        fetchData()
+    },[fetchData])
     return(
         <div className="flex justify-center items-center mt-10">
             <form className="border-2 border-green-500 shadow-md rounded-md w-80 px-8 py-5" onSubmit={submitHandler}>
