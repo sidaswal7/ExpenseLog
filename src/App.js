@@ -13,6 +13,9 @@ function App() {
     <>
       <Header/>
       <Switch>
+        <Route path="/" exact>
+          <Redirect to="/auth"/>
+        </Route>
         <Route path="/auth" exact>
           {authCtx.isLoggedIn ?<Redirect to="/profile"/>:<AuthPage/>}
         </Route>

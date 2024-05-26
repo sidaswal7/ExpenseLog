@@ -10,9 +10,28 @@ const ExpenseForm = (props)=>{
         const money = moneyRef.current.value;
         const description = descriptionRef.current.value;
         const category = categoryRef.current.value;
-        const newExpense={money,description,category}
-        props.onAddExpense(newExpense);
+        
+        (async function addExpense(){
+            try{
+                const response = await fetch('https://expense-log-21954-default-rtdb.firebaseio.com/expenses.json',{
+                    method:'POST',
+                    body: JSON.stringify({
+                        money: money,
+                        description:description,
+                        category:category
+                    }),
+                    headers:{
+                        'Content-Type':'application/json'
+                    }
+                })
+                const data = await response.json();
+                console.log(data);
 
+            }catch(error){
+                console.log(error)
+            }
+        })()
+        props.onHideForm()
     }
     return(
         <div className="flex justify-center items-center mt-5">
