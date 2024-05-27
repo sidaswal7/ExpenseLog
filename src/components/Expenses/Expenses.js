@@ -19,6 +19,7 @@ const Expenses = ()=>{
                     <h1 className="text-3xl font-medium text-center mb-5">Expense List</h1>
                     {expenseCtx.expenses.map((item)=><ExpenseItem
                         key={item.id}
+                        id={item.id}
                         money={item.money}
                         description={item.description}
                         category={item.category}
