@@ -1,15 +1,16 @@
-import React, { useContext } from "react";
 import { NavLink } from "react-router-dom";
-import AuthContext from "../../store/auth-context";
+import { useSelector, useDispatch } from "react-redux";
+import { logout } from "../../store/auth-slice";
 
 const Navigation = ()=>{
-    const authCtx = useContext(AuthContext);
+    const isLoggedIn = useSelector((state)=>state.auth.isLoggedIn);
+    const dispatch = useDispatch();
     return(
         <nav className="flex items-center">
             <NavLink to="/" className="mr-5 hover:text-yellow-400">HOME</NavLink>
             <NavLink to="/expenses" className="mr-5 hover:text-yellow-400">EXPENSES</NavLink>
             <NavLink to="/about" className="hover:text-yellow-400 mr-5">ABOUT</NavLink>
-            {authCtx.isLoggedIn && <button className="bg-green-500 hover:bg-green-600 px-2 py-1 text-white shadow rounded" onClick={authCtx.logout}>Logout</button>}
+            {isLoggedIn && <button className="bg-green-500 hover:bg-green-600 px-2 py-1 text-white shadow rounded" onClick={()=>dispatch(logout())}>Logout</button>}
         </nav>
     )
 }

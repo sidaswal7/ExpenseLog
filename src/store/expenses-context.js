@@ -1,7 +1,8 @@
 import React, { createContext, useEffect, useState, useCallback } from "react";
 
 const ExpensesContext = createContext({
-    expenses:[]
+    expenses:[],
+    addExpense:()=>{}
 })
 
 export const ExpenseContextProvider = (props)=>{
@@ -35,7 +36,8 @@ export const ExpenseContextProvider = (props)=>{
         addExpense()
     },[addExpense])
     const expensesContext = {
-        expenses: expenses
+        expenses: expenses,
+        addExpense: addExpense
     }
     return(
         <ExpensesContext.Provider value={expensesContext}>

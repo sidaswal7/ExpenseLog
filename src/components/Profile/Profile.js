@@ -1,10 +1,12 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import ProfileForm from "./ProfileForm";
-import AuthContext from "../../store/auth-context";
+import { useSelector } from "react-redux";
 
 const Profile = ()=>{
     const [showForm, setShowForm] = useState(false);
-    const authCtx = useContext(AuthContext);
+    const jwtToken = useSelector((state)=>state.auth.jwtToken);
+    const [isVerified, setIsVerified] = useState(false);
+    const [name, setName] = useState('');
 
     const toggleForm = ()=>{
         setShowForm((prevState) =>!prevState)
@@ -15,25 +17,29 @@ const Profile = ()=>{
             method:'POST',
             body: JSON.stringify({
                 requestType:'VERIFY_EMAIL',
-                idToken:authCtx.token,
+                idToken:jwtToken,
             })
         })
         const data = await response.json()
         console.log(data)
+        setIsVerified(true);
             
         } catch (error){
             console.log(error.message)
         }
 
     }
+    const updateName = (name)=>{
+        setName(name)
+    }
     return(
         <section>
             <div className="flex justify-center items-center flex-col px-10">
-                <h1 className="text-3xl mb-8 font-semibold">Welcome to Expense Tracker</h1>
+                <h1 className="text-3xl mb-8 font-semibold">Welcome to Expense {name}</h1>
                 {!showForm && <h2>Your profile is incomplete <button onClick={toggleForm} className="text-blue-500 underline">Complete Now</button> </h2>}
-                <button className="bg-green-500 hover:bg-green-600 py-1 px-2 text-white rounded shadow-md mt-4" onClick={verifyHandler}>Verify Email</button>
+                {isVerified && <button className="bg-green-500 hover:bg-green-600 py-1 px-2 text-white rounded shadow-md mt-4" onClick={verifyHandler}>Verify Email</button>}
             </div>
-            {showForm && <ProfileForm onToggle={toggleForm}/>}
+            {showForm && <ProfileForm onToggle={toggleForm} onUpdate={updateName}/>}
         </section>
     )
 }

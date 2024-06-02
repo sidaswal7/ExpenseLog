@@ -1,14 +1,13 @@
-import React, { useContext, useRef, useState } from "react";
-import AuthContext from "../../store/auth-context";
+import React, { useRef, useState } from "react";
 import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
-
+import { useDispatch } from "react-redux";
+import { login } from "../../store/auth-slice";
 
 const AuthForm = () => {
   const [hasAccount, setHasAccount] = useState(true);
-  const authCtx = useContext(AuthContext);
   const history = useHistory();
-
+  const dispatch = useDispatch();
   const switchAuthHandler = ()=>{
     setHasAccount((prevState)=> !prevState)
   }
@@ -38,7 +37,13 @@ const AuthForm = () => {
                 })
                 const data = await response.json();
                 if(response.ok){
-                    authCtx.login(data.idToken, data.displayName)
+                    dispatch(
+                      login({
+                        jwtToken: data.idToken,
+                        userName: data.displayName
+                      })
+                    )
+                    console.log(data)
                     history.replace('/profile')
                 } else{
                     throw new Error(data.error.message)

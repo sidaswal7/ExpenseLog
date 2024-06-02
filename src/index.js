@@ -2,20 +2,21 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
-import { AuthContextProvider } from './store/auth-context';
 import { BrowserRouter } from 'react-router-dom';
-import { ExpenseContextProvider } from './store/expenses-context';
+import { Provider } from 'react-redux';
+import store from './store/storeIndex';
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <AuthContextProvider>
-      <ExpenseContextProvider>
+    <Provider store={store}>
       <BrowserRouter>
         <App />
       </BrowserRouter>
-      </ExpenseContextProvider>
-    </AuthContextProvider>
+    </Provider>
+      
+    
   </React.StrictMode>
 );
 
