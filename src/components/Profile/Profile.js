@@ -35,7 +35,7 @@ const Profile = ()=>{
     return(
         <section>
             <div className="flex justify-center items-center flex-col px-10">
-                <h1 className="text-3xl mb-8 font-semibold">Welcome to Expense {name}</h1>
+                <h1 className="text-3xl mb-8 font-semibold">Welcome to Expense Tracker {name}</h1>
                 {!showForm && <h2>Your profile is incomplete <button onClick={toggleForm} className="text-blue-500 underline">Complete Now</button> </h2>}
                 {isVerified && <button className="bg-green-500 hover:bg-green-600 py-1 px-2 text-white rounded shadow-md mt-4" onClick={verifyHandler}>Verify Email</button>}
             </div>

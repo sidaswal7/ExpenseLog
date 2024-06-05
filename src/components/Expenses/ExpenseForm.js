@@ -77,7 +77,7 @@ const ExpenseForm = (props)=>{
                     <select id="category" ref={categoryRef} className="block w-full border border-slate-600" defaultValue={props.category}>
                         <option value="Food">Food</option>
                         <option value="Fuel">Fuel</option>
-                        <option value="Salary">Travel</option>
+                        <option value="Travel">Travel</option>
                         <option value="Education">Education</option>
                     </select>
                 </div>

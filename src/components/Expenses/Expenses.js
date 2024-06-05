@@ -1,11 +1,12 @@
-import React, { useState} from "react";
+import React, { useCallback, useEffect, useState} from "react";
 import ExpenseForm from "./ExpenseForm";
 import ExpenseItem from "./ExpenseItem";
 import { useSelector, useDispatch } from "react-redux";
 import {
-  addExpense,
-  editExpense,
-  deleteExpense,
+    fetchExpense,
+    addExpense,
+    editExpense,
+    deleteExpense,
 } from "../../store/expense-slice";
 
 const Expenses = () => {
@@ -22,6 +23,32 @@ const Expenses = () => {
   function handleDeleteExpense(delId, amount) {
     dispatch(deleteExpense({ delId, amount }));
   }
+
+  const fetchExpenses = useCallback( async ()=>{
+    const response = await fetch(`https://expense-log-21954-default-rtdb.firebaseio.com/expenses.json`)
+    const data = await response.json();
+    if(response.ok){
+        const fetchData = [];
+        let totalExpense = 0;
+        for( let key in data){
+            fetchData.push({
+                id:key,
+                amount:data[key].amount,
+                description:data[key].description,
+                category:data[key].category
+            });
+            totalExpense = totalExpense +   data[key].amount;
+        }
+        dispatch(fetchExpense({fetchData, totalExpense}))
+    } else{
+        alert('Some error occured!')
+    }
+
+  },[dispatch])
+  useEffect(()=>{
+    fetchExpenses()
+  },[fetchExpenses])
+
   let content =
     expenses.length > 0 ? (
       <ul className="border-2 border-slate-600 p-4 mt-10 mx-8 rounded-md shadow">

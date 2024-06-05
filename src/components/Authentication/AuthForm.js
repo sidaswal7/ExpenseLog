@@ -89,7 +89,7 @@ const AuthForm = () => {
     <div className="flex justify-center items-center mt-20">
       <form
         onSubmit={formHandler}
-        className="border-2 border-green-500 shadow-md px-8 py-5"
+        className="border-2 border-green-500 shadow-md px-8 py-5 rounded-sm"
       >
         <h2 className="mb-3 font-medium text-lg text-blue-800 text-center">
           {hasAccount ? `Sign In` : `Create New Account`}
