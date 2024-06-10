@@ -89,9 +89,9 @@ const AuthForm = () => {
     <div className="flex justify-center items-center mt-20">
       <form
         onSubmit={formHandler}
-        className="border-2 border-green-500 shadow-md px-8 py-5 rounded-sm"
+        className="shadow-md px-8 py-5 rounded-sm"
       >
-        <h2 className="mb-3 font-medium text-lg text-blue-800 text-center">
+        <h2 className="mb-3 font-medium text-xl text-center font-semibold">
           {hasAccount ? `Sign In` : `Create New Account`}
         </h2>
         <div>
@@ -100,7 +100,7 @@ const AuthForm = () => {
             placeholder="Enter Email Id"
             required
             ref={emailRef}
-            className="border border-slate-500 p-1 mb-3 placeholder:text-sm text-slate-500"
+            className="border border-slate-500 py-1 px-3 mb-5 mt-5 placeholder:text-sm text-slate-500 rounded"
           />
         </div>
         <div>
@@ -109,7 +109,7 @@ const AuthForm = () => {
             placeholder="Enter Password"
             required
             ref={passwordRef}
-            className="border border-slate-500 p-1 mb-3 placeholder:text-sm text-slate-500"
+            className="border border-slate-500 py-1 px-3 mb-5 rounded placeholder:text-sm text-slate-500"
           />
         </div>
         { hasAccount && (
@@ -124,16 +124,16 @@ const AuthForm = () => {
               placeholder="Confirm Password"
               required
               ref={confirmPasswordRef}
-              className="border border-slate-500 p-1 mb-3 placeholder:text-sm text-slate-500"
+              className="border border-slate-500 py-1 px-3 mb-5 rounded placeholder:text-sm text-slate-500"
             />
           </div>
         )}
-        <div className="flex justify-center items-center">
+        <div className="flex justify-center items-center mt-3">
           <button
             type="submit"
             className="bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded-md shadow-lg my-3"
           >
-            {hasAccount ? `SignIn` : `SignUp`}
+            {hasAccount ? `Sign In` : `Sign Up`}
           </button>
         </div>
         <p className="text-sm text-slate-500 mr-1 text-center">

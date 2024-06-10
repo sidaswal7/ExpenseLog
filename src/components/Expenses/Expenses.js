@@ -51,7 +51,7 @@ const Expenses = () => {
 
   let content =
     expenses.length > 0 ? (
-      <ul className="border-2 border-slate-600 p-4 mt-10 mx-8 rounded-md shadow">
+      <ul className="border-2 border-slate-600 p-4 mt-10 mx-8 rounded-md shadow bg-blue-100">
         <h1 className="text-3xl font-medium text-center mb-5">Expense List</h1>
         {expenses.map((item) => (
           <ExpenseItem

@@ -59,7 +59,7 @@ const ExpenseForm = (props)=>{
     }
     return(
         <div className="flex justify-center items-center mt-5">
-            <form className="border-2 border-green-500 rounded shadow p-4" onSubmit={expenseFormHandler}>
+            <form className="rounded shadow p-4" onSubmit={expenseFormHandler}>
                 <div className="flex justify-between items-center">
                     <h1 className="text-xl font-medium">{props.editExpense ?'Edit Expense':'Add Expenses'}</h1>
                     <button onClick={props.onHideForm} className="text-2xl text-red-500">&times;</button>
