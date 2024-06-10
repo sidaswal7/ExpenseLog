@@ -91,8 +91,8 @@ const AuthForm = () => {
         onSubmit={formHandler}
         className="shadow-md px-8 py-5 rounded-sm"
       >
-        <h2 className="mb-3 font-medium text-xl text-center font-semibold">
-          {hasAccount ? `Sign In` : `Create New Account`}
+        <h2 className="mb-3 font-medium text-2xl text-center font-semiBold capitalize">
+          {hasAccount ? `Log in to account` : `Create a New Account`}
         </h2>
         <div>
           <input
@@ -100,7 +100,7 @@ const AuthForm = () => {
             placeholder="Enter Email Id"
             required
             ref={emailRef}
-            className="border border-slate-500 py-1 px-3 mb-5 mt-5 placeholder:text-sm text-slate-500 rounded"
+            className="border border-slate-500 py-1 px-3 mb-5 mt-5 placeholder:text-sm text-slate-500 rounded w-full"
           />
         </div>
         <div>
@@ -109,12 +109,12 @@ const AuthForm = () => {
             placeholder="Enter Password"
             required
             ref={passwordRef}
-            className="border border-slate-500 py-1 px-3 mb-5 rounded placeholder:text-sm text-slate-500"
+            className="border border-slate-500 py-1 px-3 mb-5 rounded placeholder:text-sm text-slate-500 w-full"
           />
         </div>
         { hasAccount && (
             <div className="flex justify-center items-center">
-                <Link to="/forgot-password" className="text-red-500 underline text-sm">Forgot Password?</Link>
+                <Link to="/forgot-password" className="text-red-500 text-sm">Forgot Password?</Link>
             </div>
         )}
         {!hasAccount && (
@@ -124,14 +124,14 @@ const AuthForm = () => {
               placeholder="Confirm Password"
               required
               ref={confirmPasswordRef}
-              className="border border-slate-500 py-1 px-3 mb-5 rounded placeholder:text-sm text-slate-500"
+              className="border border-slate-500 py-1 px-3 mb-5 rounded placeholder:text-sm text-slate-500 w-full"
             />
           </div>
         )}
         <div className="flex justify-center items-center mt-3">
           <button
             type="submit"
-            className="bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded-md shadow-lg my-3"
+            className="bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded-md shadow-lg my-3 w-full"
           >
             {hasAccount ? `Sign In` : `Sign Up`}
           </button>

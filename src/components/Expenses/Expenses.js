@@ -87,8 +87,8 @@ const Expenses = () => {
         )}
       </div>
       <div>
-        <p className="text-center text-lg mt-8">
-          Total Expense: <span>{totalExpense}</span>
+        <p className="text-center text-2xl font-bold mt-8">
+          Total Expense: &#8377;<span>{totalExpense}</span>
         </p>
       </div>
       {totalExpense > 10000 && <div className="flex justify-center items-center">
