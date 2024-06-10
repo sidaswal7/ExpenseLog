@@ -62,7 +62,7 @@ const ExpenseForm = (props)=>{
             <form className="rounded shadow p-4" onSubmit={expenseFormHandler}>
                 <div className="flex justify-between items-center">
                     <h1 className="text-xl font-medium">{props.editExpense ?'Edit Expense':'Add Expenses'}</h1>
-                    <button onClick={props.onHideForm} className="text-2xl text-red-500">&times;</button>
+                    <button onClick={props.onHideForm} className="text-3xl text-red-500 font-bold">&times;</button>
                 </div>
                 <div className="mt-2">
                     <label htmlFor="money" className="mb-2 text-md font-medium">Amount Spent: </label>
@@ -81,8 +81,8 @@ const ExpenseForm = (props)=>{
                         <option value="Education">Education</option>
                     </select>
                 </div>
-                <div className="flex justify-center items-center">
-                    <button type="submit" className="bg-green-500 hover:bg-green-600 text-white px-2 py-1 mt-3 rounded-md shadow-md">{props.editExpense ? 'Update   ':'Add Expense'}</button>
+                <div className="flex justify-center items-center mt-3">
+                    <button type="submit" className="bg-green-500 hover:bg-green-600 text-white px-2 py-1 mt-3 rounded-md shadow-md w-full">{props.editExpense ? 'Update   ':'Add Expense'}</button>
                 </div>
 
             </form>
